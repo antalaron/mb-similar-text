@@ -1,0 +1,32 @@
+{
+    "name": "antalaron/mb-similar-text",
+    "description": "PHP similar_text() function for UTF-8",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antal Áron",
+            "email": "antalaron@antalaron.hu"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "symfony/polyfill-mbstring": "^1.5"
+    },
+    "autoload" : {
+        "psr-4": { "Antalaron\\MbSimilarText\\": "src/" },
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "order-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.5-dev"
+        }
+    }
+}
