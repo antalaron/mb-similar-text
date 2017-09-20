@@ -42,7 +42,7 @@ final class MbSimilarText
 
         for ($p = 0; $p < $l1; ++$p) {
             for ($q = 0; $q < $l2; ++$q) {
-                for ($l = 0; ($p + $l < $l1) && ($q + $l < $l2) && $str1[$p + $l] === $str2[$q + $l]; ++$l) {
+                for ($l = 0; ($p + $l < $l1) && ($q + $l < $l2) && mb_substr($str1, $p + $l, 1) === mb_substr($str2, $q + $l, 1); ++$l) {
                     // nothing to do
                 }
                 if ($l > $max) {
