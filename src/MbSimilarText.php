@@ -10,17 +10,17 @@
 namespace Antalaron\MbSimilarText;
 
 /**
- * Implementation od mb_similat_text.
+ * Implementation of `mb_similat_text()`.
  *
  * @author Antal Áron <antalaron@antalaron.hu>
  */
 final class MbSimilarText
 {
     /**
-     * Implementation of `mb_similar_text`.
+     * Implementation of `mb_similar_text()`.
      *
      * @see http://php.net/manual/en/function.similar-text.php
-     * @see https://gist.github.com/soderlind/74a06f9408306cfc5de9
+     * @see http://locutus.io/php/strings/similar_text/
      *
      * @param string $str1
      * @param string $str2
@@ -30,19 +30,44 @@ final class MbSimilarText
      */
     public static function mb_similar_text($str1, $str2, &$percent = null)
     {
-        $array1 = self::splitString($str1);
-        $array2 = self::splitString($str2);
+        if (0 === mb_strlen($str1) + mb_strlen($str2)) {
+            $percent = 0.0;
 
-        $similarity = count($array2) - count(array_diff($array2, $array1));
-        $percent = ($similarity * 200) / (mb_strlen($str1) + mb_strlen($str2));
+            return 0;
+        }
+
+        $pos1 = $pos2 = $max = 0;
+        $l1 = mb_strlen($str1);
+        $l2 = mb_strlen($str2);
+
+        for ($p = 0; $p < $l1; ++$p) {
+            for ($q = 0; $q < $l2; ++$q) {
+                for ($l = 0; ($p + $l < $l1) && ($q + $l < $l2) && $str1[$p + $l] === $str2[$q + $l]; ++$l) {
+                    // nothing to do
+                }
+                if ($l > $max) {
+                    $max = $l;
+                    $pos1 = $p;
+                    $pos2 = $q;
+                }
+            }
+        }
+
+        $similarity = $max;
+        if ($similarity) {
+            if ($pos1 && $pos2) {
+                $similarity += self::mb_similar_text(mb_substr($str1, 0, $pos1), mb_substr($str2, 0, $pos2));
+            }
+            if (($pos1 + $max < $l1) && ($pos2 + $max < $l2)) {
+                $similarity += self::mb_similar_text(
+                    mb_substr($str1, $pos1 + $max, $l1 - $pos1 - $max),
+                    mb_substr($str2, $pos2 + $max, $l2 - $pos2 - $max)
+                );
+            }
+        }
+
+        $percent = ($similarity * 200.0) / ($l1 + $l2);
 
         return $similarity;
-    }
-
-    private static function splitString($str)
-    {
-        preg_match_all('/./u', $str, $array);
-
-        return $array[0];
     }
 }

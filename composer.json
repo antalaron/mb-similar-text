@@ -17,7 +17,9 @@
         "phpunit/phpunit": "^4.0|^5.0"
     },
     "autoload" : {
-        "psr-4": { "Antalaron\\MbSimilarText\\": "src/" },
+        "psr-4": {
+            "Antalaron\\MbSimilarText\\": "src/"
+        },
         "files": [
             "src/bootstrap.php"
         ]
@@ -29,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.5-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
