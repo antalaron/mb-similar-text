@@ -10,7 +10,7 @@
 namespace Antalaron\MbSimilarText;
 
 /**
- * Implementation of `mb_similat_text()`.
+ * Implementation of `mb_similar_text()`.
  *
  * @author Antal Áron <antalaron@antalaron.hu>
  */
