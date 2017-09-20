@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": ">=5.5.9",
         "symfony/polyfill-mbstring": "^1.5"
     },
     "require-dev": {
