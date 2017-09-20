@@ -1,7 +1,7 @@
 MbSimilarText
 =============
 
-This project provides the missing `mb_similar_text()` function.
+This project provides the missing `mb_similar_text()` function for UTF-8.
 
 License
 =======
