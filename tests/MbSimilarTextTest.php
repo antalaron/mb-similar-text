@@ -22,8 +22,8 @@ class MbSimilarTextTest extends \PHPUnit_Framework_TestCase
      */
     public function testMbSimilarTextIsSameAsSimilarText($str1, $str2)
     {
-        $this->assertSame(similar_text($str1, $str2, $percent1), mb_similar_text($str1, $str2, $percent2));
-        $this->assertSame($percent1, $percent2);
+        $this->assertEquals(similar_text($str1, $str2, $percent1), mb_similar_text($str1, $str2, $percent2));
+        $this->assertEquals($percent1, $percent2, '', 0.01);
     }
 
     /**
@@ -32,8 +32,8 @@ class MbSimilarTextTest extends \PHPUnit_Framework_TestCase
      */
     public function testMbSimilarTextWithValues($str1, $str2, $similarity, $percent)
     {
-        $this->assertSame($similarity, mb_similar_text($str1, $str2, $gotPercent));
-        $this->assertSame($percent, $gotPercent);
+        $this->assertEquals($similarity, mb_similar_text($str1, $str2, $gotPercent));
+        $this->assertEquals($percent, $gotPercent, '', 0.01);
     }
 
     public function plainValues()
